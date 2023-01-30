@@ -19,6 +19,8 @@ Rails.configuration.to_prepare do
     store.subscribe_to_all_events(RailsEventStore::LinkByEventType.new)
     store.subscribe_to_all_events(RailsEventStore::LinkByCorrelationId.new)
     store.subscribe_to_all_events(RailsEventStore::LinkByCausationId.new)
+
+    store.subscribe Pokemons::OnWildPokemonAppeared, to: [Events::Pokemons::WildPokemonAppeared]
   end
 
   # Register command handlers below
