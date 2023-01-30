@@ -74,3 +74,4 @@ end
 
 gem "rails_event_store", "~> 2.9.0"
 gem "graphql"
+gem "interactor", "~> 3.0"
