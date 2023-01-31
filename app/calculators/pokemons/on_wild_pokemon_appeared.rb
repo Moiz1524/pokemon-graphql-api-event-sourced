@@ -2,7 +2,7 @@ module Pokemons
   class OnWildPokemonAppeared
     def call(event)
       pokemon = Pokemon.find_or_initialize_by(id: event.data.fetch(:pokemon_id))
-      attributes = event.data.fetch('attributes')
+      attributes = event.data.fetch(:attributes)
 
       pokemon.gender = attributes.fetch(:gender)
       pokemon.level = attributes.fetch(:level)
