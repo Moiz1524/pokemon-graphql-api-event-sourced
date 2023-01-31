@@ -3,8 +3,9 @@ module Pokemons
     def call
       prepare_id_and_stream
       instantiate_aggregate_repository
-      pokemon.appear_in_the_wild(pokemon_id: pokemon_id, route: '11')
+      @pokemon.appear_in_the_wild(pokemon_id: @pokemon_id, route: '11')
       capture_associated_event
+      context.event = get_associated_event
     rescue => e
       context.fail!(error: e.message)
     end
@@ -30,6 +31,10 @@ module Pokemons
     def capture_associated_event
       # Store event into repository
       @repository.store(@pokemon, @stream_name)
+    end
+
+    def get_associated_event
+      Rails.configuration.event_store.read.stream(@stream_name).last
     end
   end
 end
